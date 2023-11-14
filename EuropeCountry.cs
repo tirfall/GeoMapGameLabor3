@@ -333,41 +333,50 @@ namespace GeoMapGameLabor3
             return label;
         }
 
-        private void Btn_Click(object? sender, EventArgs e)
+        private void Btn_Click(object? sender, EventArgs e) 
         {
-            bool isCorrectCountry = false;
 
-            for (int x = 0; x < list_l_country.Count; x++)
+
+            AddToListLabels();
+            for (int x = 0; x < list_l_country.Count; x++)//Здесь идёт проверка места, с ней всё нормально вроде
             {
-                if (l1.Bounds.IntersectsWith(list_l_country[x].Bounds))
-                {
-                    string currentCountry = EuropaCountry.ListCountryIndex(x);
 
-                    if (countryNamel1 == currentCountry)
+                if ((l1.Location.X < list_l_country[x].Location.X + list_l_country[x].Width) && (l1.Location.X > list_l_country[x].Location.X))
+                {
+                    if ((l1.Location.Y < list_l_country[x].Location.Y + list_l_country[x].Height) && (l1.Location.Y > list_l_country[x].Location.Y))
                     {
-                        isCorrectCountry = true;
-                        break;
+
+                        for (int k = 0; countryNamel1 != EuropaCountry.ListCountryIndex(k); k++) //здесь я уже добавил этот цикл от отчаяния, посчитал что возможно поможет что-то сделать.
+                            //Проблема в том что в ListCountryIndex i равняется нулл почему-то. И не работают нормально ни числа (x и k) ни индексы. Я уже запутался здесь в логике. Возможно полностью здесь всё перепишу с 341 по 370 строку
+                            //Первый цикл у нас достаёт индекс лейбла и сравнивает с кордами. Второй должен как бы проверять название. Когда ставил в 354 строке вместо к, х. То получалось что например при первом нажатии
+                            //брало не албанию как надо, а Андорру. При втором нажатии уже через одну страну брало, и так далее
+                        {
+
+                            if (countryNamel1 == EuropaCountry.ListCountryIndex(k))
+                            {
+
+                                result_label.Text = "correct";
+                                break;
+                            }
+                            else
+                            {
+                                result_label.Text = "false";
+                            }
+                        }
                     }
                     else
                     {
                         result_label.Text = "false";
                     }
-                }
-                else
-                {
-                    result_label.Text = "false";
-                }
-            }
 
-            if (isCorrectCountry)
-            {
-                result_label.Text = "correct";
-            }
+                }
 
+            }
             if (countryNamel1 == "")
             {
                 final_label.Visible = true;
                 pb.Visible = false;
+
             }
             else
             {
@@ -376,55 +385,6 @@ namespace GeoMapGameLabor3
             }
 
             l1.Location = new Point(400, 10);
-
-
-
-
-            //AddToListLabels();
-            //for (int x = 0; x < list_l_country.Count; x++)
-            //{
-
-            //    if ((l1.Location.X < list_l_country[x].Location.X + list_l_country[x].Width) && (l1.Location.X > list_l_country[x].Location.X))
-            //    {
-            //        if ((l1.Location.Y < list_l_country[x].Location.Y + list_l_country[x].Height) && (l1.Location.Y > list_l_country[x].Location.Y))
-            //        {
-
-            //            for (int k = 0; countryNamel1 != EuropaCountry.ListCountryIndex(k); k++)
-            //            {
-
-            //                if (countryNamel1 == EuropaCountry.ListCountryIndex(k))
-            //                {
-
-            //                    result_label.Text = "correct";
-            //                    break;
-            //                }
-            //                else
-            //                {
-            //                    result_label.Text = "false";
-            //                }
-            //            }
-            //        }
-            //        else
-            //        {
-            //            result_label.Text = "false";
-            //        }
-
-            //    }
-
-            //}
-            //if (countryNamel1 == "")
-            //{
-            //    final_label.Visible = true;
-            //    pb.Visible = false;
-
-            //}
-            //else
-            //{
-            //    countryNamel1 = EuropaCountry.CountryName();
-            //    countryNameLabel.Text = countryNamel1;
-            //}
-
-            //l1.Location = new Point(400, 10);
 
 
 
