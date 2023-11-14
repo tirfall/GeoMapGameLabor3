@@ -1,7 +1,9 @@
-﻿using System;
+﻿using GeoMapGameLabor3;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Printing;
 using System.Linq;
@@ -25,7 +27,10 @@ namespace GeoMapGameLabor3
         bool Label1Bool = false;
         int X_label = 0, Y_label = 0;
         string countryNamel1;
-        System.Windows.Forms.Label final_label, countryNameLabel, result_label;
+        System.Windows.Forms.Label final_label, countryNameLabel, result_label, final1_label, final2_label;
+        List<System.Windows.Forms.Label> list_l_country = new List<System.Windows.Forms.Label>();
+        string test;
+        int k;
 
         public EuropeCountry()
         {
@@ -46,6 +51,10 @@ namespace GeoMapGameLabor3
             this.Controls.Add(pb);
 
             EuropaCountry.ListAndMap();
+
+            
+
+
 
             l1 = new System.Windows.Forms.Label();
             l1.Font = new Font("Arial", 8, FontStyle.Bold);
@@ -82,6 +91,20 @@ namespace GeoMapGameLabor3
             final_label.Text = "Final";
             final_label.Visible = false;
             this.Controls.Add(final_label);
+
+            final1_label = new System.Windows.Forms.Label();
+            final1_label.Font = new Font("Arial", 7, FontStyle.Bold);
+            final1_label.Size = new Size(100, 30);
+            final1_label.Location = new Point(800, 10);
+            final1_label.Text = "";
+            this.Controls.Add(final1_label);
+
+            final2_label = new System.Windows.Forms.Label();
+            final2_label.Font = new Font("Arial", 7, FontStyle.Bold);
+            final2_label.Size = new Size(100, 30);
+            final2_label.Location = new Point(700, 10);
+            final2_label.Text = "";
+            this.Controls.Add(final2_label);
 
             result_label = new System.Windows.Forms.Label();
             result_label.Font = new Font("Arial", 12, FontStyle.Bold);
@@ -243,12 +266,61 @@ namespace GeoMapGameLabor3
 
             l_United_Kingdom = CreateCountryLabel("United Kingdom", 260, 270);
             pb.Controls.Add(l_United_Kingdom);
-
-
-
-
+            
         }
-
+        public void AddToListLabels()
+        {
+            list_l_country.Add(l_Albania);
+            list_l_country.Add(l_Andorra);
+            list_l_country.Add(l_Armenia);
+            list_l_country.Add(l_Austria);
+            list_l_country.Add(l_Azerbaijan);
+            list_l_country.Add(l_Belarus);
+            list_l_country.Add(l_Belgium);
+            list_l_country.Add(l_Bosnia_and_Herzegovina);
+            list_l_country.Add(l_Bulgaria);
+            list_l_country.Add(l_Croatia);
+            list_l_country.Add(l_Cyprus);
+            list_l_country.Add(l_Czech_Republic);
+            list_l_country.Add(l_Denmark);
+            list_l_country.Add(l_Estonia);
+            list_l_country.Add(l_Finland);
+            list_l_country.Add(l_France);
+            list_l_country.Add(l_Georgia);
+            list_l_country.Add(l_Germany);
+            list_l_country.Add(l_Greece);
+            list_l_country.Add(l_Hungary);
+            list_l_country.Add(l_Iceland);
+            list_l_country.Add(l_Ireland);
+            list_l_country.Add(l_Italy);
+            list_l_country.Add(l_Kazakhstan);
+            list_l_country.Add(l_Kosovo);
+            list_l_country.Add(l_Latvia);
+            list_l_country.Add(l_Liechtenstein);
+            list_l_country.Add(l_Lithuania);
+            list_l_country.Add(l_Luxembourg);
+            list_l_country.Add(l_Malta);
+            list_l_country.Add(l_Moldova);
+            list_l_country.Add(l_Monaco);
+            list_l_country.Add(l_Montenegro);
+            list_l_country.Add(l_Netherlands);
+            list_l_country.Add(l_North_Macedonia);
+            list_l_country.Add(l_Norway);
+            list_l_country.Add(l_Poland);
+            list_l_country.Add(l_Portugal);
+            list_l_country.Add(l_Romania);
+            list_l_country.Add(l_Russia);
+            list_l_country.Add(l_San_Marino);
+            list_l_country.Add(l_Serbia);
+            list_l_country.Add(l_Slovakia);
+            list_l_country.Add(l_Slovenia);
+            list_l_country.Add(l_Spain);
+            list_l_country.Add(l_Sweden);
+            list_l_country.Add(l_Switzerland);
+            list_l_country.Add(l_Turkey);
+            list_l_country.Add(l_Ukraine);
+            list_l_country.Add(l_United_Kingdom);
+        }
         private System.Windows.Forms.Label CreateCountryLabel(string countryName, int x, int y)
         {
             System.Windows.Forms.Label label = new System.Windows.Forms.Label();
@@ -263,21 +335,100 @@ namespace GeoMapGameLabor3
 
         private void Btn_Click(object? sender, EventArgs e)
         {
+            bool isCorrectCountry = false;
 
-            List<System.Windows.Forms.Label> list_l_country = new List<System.Windows.Forms.Label>();
-            list_l_country.Add(l_Albania, l_Andorra, l_Armenia, l_Austria, l_Azerbaijan, l_Belarus, l_Belgium, l_Bosnia_and_Herzegovina, l_Bulgaria, l_Croatia, l_Cyprus, l_Czech_Republic, l_Denmark, l_Estonia, l_Finland, l_France, l_Georgia, l_Germany, l_Greece, l_Hungary, l_Iceland, l_Ireland, l_Italy, l_Kazakhstan, l_Kosovo, l_Latvia, l_Liechtenstein, l_Lithuania, l_Luxembourg, l_Malta, l_Moldova, l_Monaco, l_Montenegro, l_Netherlands, l_North_Macedonia, l_Norway, l_Poland, l_Portugal, l_Romania, l_Russia, l_San_Marino, l_Serbia, l_Slovakia, l_Slovenia, l_Spain, l_Sweden, l_Switzerland, l_Turkey, l_Ukraine, l_United_Kingdom);
-            if ((l1.Location.X < list_l_country[0].Location.X + list_l_country[0].Width) && (l1.Location.X > list_l_country[0].Location.X))
+            for (int x = 0; x < list_l_country.Count; x++)
             {
-                if ((l1.Location.Y < list_l_country[0].Location.Y + list_l_country[0].Height) && (l1.Location.Y > list_l_country[0].Location.Y))
+                if (l1.Bounds.IntersectsWith(list_l_country[x].Bounds))
                 {
-                    if (countryNamel1 == "Albania") { result_label.Text = "correct"; }
+                    string currentCountry = EuropaCountry.ListCountryIndex(x);
+
+                    if (countryNamel1 == currentCountry)
+                    {
+                        isCorrectCountry = true;
+                        break;
+                    }
                     else
                     {
                         result_label.Text = "false";
                     }
                 }
-
+                else
+                {
+                    result_label.Text = "false";
+                }
             }
+
+            if (isCorrectCountry)
+            {
+                result_label.Text = "correct";
+            }
+
+            if (countryNamel1 == "")
+            {
+                final_label.Visible = true;
+                pb.Visible = false;
+            }
+            else
+            {
+                countryNamel1 = EuropaCountry.CountryName();
+                countryNameLabel.Text = countryNamel1;
+            }
+
+            l1.Location = new Point(400, 10);
+
+
+
+
+            //AddToListLabels();
+            //for (int x = 0; x < list_l_country.Count; x++)
+            //{
+
+            //    if ((l1.Location.X < list_l_country[x].Location.X + list_l_country[x].Width) && (l1.Location.X > list_l_country[x].Location.X))
+            //    {
+            //        if ((l1.Location.Y < list_l_country[x].Location.Y + list_l_country[x].Height) && (l1.Location.Y > list_l_country[x].Location.Y))
+            //        {
+
+            //            for (int k = 0; countryNamel1 != EuropaCountry.ListCountryIndex(k); k++)
+            //            {
+
+            //                if (countryNamel1 == EuropaCountry.ListCountryIndex(k))
+            //                {
+
+            //                    result_label.Text = "correct";
+            //                    break;
+            //                }
+            //                else
+            //                {
+            //                    result_label.Text = "false";
+            //                }
+            //            }
+            //        }
+            //        else
+            //        {
+            //            result_label.Text = "false";
+            //        }
+
+            //    }
+
+            //}
+            //if (countryNamel1 == "")
+            //{
+            //    final_label.Visible = true;
+            //    pb.Visible = false;
+
+            //}
+            //else
+            //{
+            //    countryNamel1 = EuropaCountry.CountryName();
+            //    countryNameLabel.Text = countryNamel1;
+            //}
+
+            //l1.Location = new Point(400, 10);
+
+
+
+
             //else if ((l1.Location.X < l_Andorra.Location.X + l_Andorra.Width) && (l1.Location.X > l_Andorra.Location.X))
             //{
             //    if ((l1.Location.Y < l_Andorra.Location.Y + l_Andorra.Height) && (l1.Location.Y > l_Andorra.Location.Y))
@@ -421,24 +572,9 @@ namespace GeoMapGameLabor3
             //        }
             //    }
             //}
-            
-            else
-            {
-                result_label.Text = "bruh";
-            }
-            if (countryNamel1 == "")
-            {
-                final_label.Visible = true;
-                pb.Visible = false;
 
-            }
-            else
-            {
-                countryNamel1 = EuropaCountry.CountryName();
-                countryNameLabel.Text = countryNamel1;
-            }
 
-            l1.Location = new Point(400, 10);
+
         }
 
         private void Pb_MouseDown(object sender, MouseEventArgs e)
@@ -484,3 +620,5 @@ namespace GeoMapGameLabor3
 
     }
 }
+
+

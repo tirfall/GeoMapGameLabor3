@@ -9,9 +9,11 @@ namespace GeoMapGameLabor3
 {
     public class Map
     {
+        
         List<string> list_country = new List<string>();
         string ListName = "";
         Random random = new Random();
+        //int x = 0;
 
         public Map(string List_Name)
         {
@@ -37,8 +39,16 @@ namespace GeoMapGameLabor3
             {
                 Console.WriteLine($"Error: {ex.Message}");
             }
+            Console.WriteLine(list_country);
 
         }
+        public string ListCountryIndex(int x)
+        {
+            string i = list_country[x];
+            //x++;
+            return i;
+        }
+        
         public string CountryName()
         {
             if (list_country.Count == 0)
