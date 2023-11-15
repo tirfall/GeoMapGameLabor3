@@ -270,56 +270,7 @@ namespace GeoMapGameLabor3
         }
         public void AddToListLabels()
         {
-            list_l_country.Add(l_Albania);
-            list_l_country.Add(l_Andorra);
-            list_l_country.Add(l_Armenia);
-            list_l_country.Add(l_Austria);
-            list_l_country.Add(l_Azerbaijan);
-            list_l_country.Add(l_Belarus);
-            list_l_country.Add(l_Belgium);
-            list_l_country.Add(l_Bosnia_and_Herzegovina);
-            list_l_country.Add(l_Bulgaria);
-            list_l_country.Add(l_Croatia);
-            list_l_country.Add(l_Cyprus);
-            list_l_country.Add(l_Czech_Republic);
-            list_l_country.Add(l_Denmark);
-            list_l_country.Add(l_Estonia);
-            list_l_country.Add(l_Finland);
-            list_l_country.Add(l_France);
-            list_l_country.Add(l_Georgia);
-            list_l_country.Add(l_Germany);
-            list_l_country.Add(l_Greece);
-            list_l_country.Add(l_Hungary);
-            list_l_country.Add(l_Iceland);
-            list_l_country.Add(l_Ireland);
-            list_l_country.Add(l_Italy);
-            list_l_country.Add(l_Kazakhstan);
-            list_l_country.Add(l_Kosovo);
-            list_l_country.Add(l_Latvia);
-            list_l_country.Add(l_Liechtenstein);
-            list_l_country.Add(l_Lithuania);
-            list_l_country.Add(l_Luxembourg);
-            list_l_country.Add(l_Malta);
-            list_l_country.Add(l_Moldova);
-            list_l_country.Add(l_Monaco);
-            list_l_country.Add(l_Montenegro);
-            list_l_country.Add(l_Netherlands);
-            list_l_country.Add(l_North_Macedonia);
-            list_l_country.Add(l_Norway);
-            list_l_country.Add(l_Poland);
-            list_l_country.Add(l_Portugal);
-            list_l_country.Add(l_Romania);
-            list_l_country.Add(l_Russia);
-            list_l_country.Add(l_San_Marino);
-            list_l_country.Add(l_Serbia);
-            list_l_country.Add(l_Slovakia);
-            list_l_country.Add(l_Slovenia);
-            list_l_country.Add(l_Spain);
-            list_l_country.Add(l_Sweden);
-            list_l_country.Add(l_Switzerland);
-            list_l_country.Add(l_Turkey);
-            list_l_country.Add(l_Ukraine);
-            list_l_country.Add(l_United_Kingdom);
+            list_l_country.AddRange(new System.Windows.Forms.Label[] { l_Albania, l_Andorra, l_Armenia, l_Austria, l_Azerbaijan, l_Belarus, l_Belgium, l_Bosnia_and_Herzegovina, l_Bulgaria, l_Croatia, l_Cyprus, l_Czech_Republic, l_Denmark, l_Estonia, l_Finland, l_France, l_Georgia, l_Germany, l_Greece, l_Hungary, l_Iceland, l_Ireland, l_Italy, l_Kazakhstan, l_Kosovo, l_Latvia, l_Liechtenstein, l_Lithuania, l_Luxembourg, l_Malta, l_Moldova, l_Monaco, l_Montenegro, l_Netherlands, l_North_Macedonia, l_Norway, l_Poland, l_Portugal, l_Romania, l_Russia, l_San_Marino, l_Serbia, l_Slovakia, l_Slovenia, l_Spain, l_Sweden, l_Switzerland, l_Turkey, l_Ukraine, l_United_Kingdom });
         }
         private System.Windows.Forms.Label CreateCountryLabel(string countryName, int x, int y)
         {
@@ -346,13 +297,14 @@ namespace GeoMapGameLabor3
                     if ((l1.Location.Y < list_l_country[x].Location.Y + list_l_country[x].Height) && (l1.Location.Y > list_l_country[x].Location.Y))
                     {
 
-                        for (int k = 0; countryNamel1 != EuropaCountry.ListCountryIndex(k); k++) //здесь я уже добавил этот цикл от отчаяния, посчитал что возможно поможет что-то сделать.
-                            //Проблема в том что в ListCountryIndex i равняется нулл почему-то. И не работают нормально ни числа (x и k) ни индексы. Я уже запутался здесь в логике. Возможно полностью здесь всё перепишу с 341 по 370 строку
-                            //Первый цикл у нас достаёт индекс лейбла и сравнивает с кордами. Второй должен как бы проверять название. Когда ставил в 354 строке вместо к, х. То получалось что например при первом нажатии
-                            //брало не албанию как надо, а Андорру. При втором нажатии уже через одну страну брало, и так далее
-                        {
-
-                            if (countryNamel1 == EuropaCountry.ListCountryIndex(k))
+                        //for (int k = 0; countryNamel1 != EuropaCountry.ListCountryIndex(k); k++) 
+                        //    //здесь я уже добавил этот цикл от отчаяния, посчитал что возможно поможет что-то сделать.
+                        //    //Проблема в том что в ListCountryIndex i равняется нулл почему-то. И не работают нормально ни числа (x и k) ни индексы. Я уже запутался здесь в логике. Возможно полностью здесь всё перепишу с 341 по 370 строку
+                        //    //Первый цикл у нас достаёт индекс лейбла и сравнивает с кордами. Второй должен как бы проверять название. Когда ставил в 354 строке вместо к, х. То получалось что например при первом нажатии
+                        //    //брало не албанию как надо, а Андорру. При втором нажатии уже через одну страну брало, и так далее
+                        //{
+                            final1_label.Text = EuropaCountry.ListCountryIndex(x);
+                            if (countryNamel1 == EuropaCountry.ListCountryIndex(x))
                             {
 
                                 result_label.Text = "correct";
@@ -362,7 +314,7 @@ namespace GeoMapGameLabor3
                             {
                                 result_label.Text = "false";
                             }
-                        }
+                        //}
                     }
                     else
                     {

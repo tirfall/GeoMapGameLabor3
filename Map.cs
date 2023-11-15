@@ -11,9 +11,10 @@ namespace GeoMapGameLabor3
     {
         
         List<string> list_country = new List<string>();
+        List<string> list_country2 = new List<string>();
         string ListName = "";
         Random random = new Random();
-        //int x = 0;
+        int randomIndex;
 
         public Map(string List_Name)
         {
@@ -32,6 +33,7 @@ namespace GeoMapGameLabor3
                     {
                         string line = reader.ReadLine();
                         list_country.Add(line);
+                        
                     }
                 }
             }
@@ -53,20 +55,38 @@ namespace GeoMapGameLabor3
         {
             if (list_country.Count == 0)
             {
-                // Если список пуст, вернуть пустую строку или другое значение по умолчанию
                 return string.Empty;
             }
 
-            // Получаем случайный индекс из списка
-            int randomIndex = random.Next(list_country.Count);
+            string randomCountry;
 
-            // Получаем случайное значение из списка по выбранному индексу
-            string randomCountry = list_country[randomIndex];
+            for (int i = 0; i <= list_country.Count; i++)
+            {
+                randomIndex = random.Next(list_country.Count);
+                randomCountry = list_country[randomIndex];
+                if (randomCountry i)
+            }
+            do
+            {
+                
+            } while (list_use.Contains(randomCountry));
 
-            // Удаляем выбранное значение из списка, чтобы оно не повторялось
-            list_country.RemoveAt(randomIndex);
+            // Добавляем выбранное значение в список использованных
+            list_use.Add(randomCountry);
 
+            // Если список использованных стран стал таким же, как основной список, завершаем игру
+            if (list_use.Count == list_country.Count)
+            {
+                // Логика завершения игры (например, вывод сообщения или другие действия)
+                // ...
+
+                // Возвращаем пустую строку или другое значение по умолчанию
+                return string.Empty;
+            }
+
+            // Возвращаем уникальное значение
             return randomCountry;
+            
         }
         
     }
