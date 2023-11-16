@@ -11,6 +11,8 @@ namespace GeoMapGameLabor3
         PictureBox pb;
         Label l1, l2, l3;
         bool SquareBool = false, CircleBool = false, RectangleBool = false, LabelBool = false;
+        int X_l3 = 0, Y_l3 = 0;
+        bool Label3Bool = false;
         public StartMenu()
         {
             this.Height = 800;
@@ -58,6 +60,38 @@ namespace GeoMapGameLabor3
             l3.BackColor = Color.LightGray;
             l3.BorderStyle = BorderStyle.Fixed3D;
             pb.Controls.Add(l3);
+
+            l3.MouseDown += new MouseEventHandler(l3_MouseDown);
+            l3.MouseMove += new MouseEventHandler(l3_MouseMove);
+            l3.MouseUp += new MouseEventHandler(l3_MouseUp);
+        }
+
+        private void l3_MouseUp(object? sender, MouseEventArgs e)
+        {
+            Label3Bool = false;
+        }
+
+        private void l3_MouseMove(object? sender, MouseEventArgs e)
+        {
+            if (Label3Bool)
+            {
+                l3.Left += e.X - X_label;
+                l3.Top += e.Y - Y_label;
+            }
+        }
+
+        private void l3_MouseDown(object? sender, MouseEventArgs e)
+        {
+            if ((e.X < l3.Width) && (e.X > 0))
+            {
+                if ((e.Y < l3.Height) && (e.Y > 0))
+                {
+                    Label3Bool = true;
+
+                    X_label = e.X;
+                    Y_label = e.Y;
+                }
+            }
         }
 
         private void pb_MouseMove(object? sender, MouseEventArgs e)
@@ -78,11 +112,7 @@ namespace GeoMapGameLabor3
                 Rectangle.X = e.X - X_rct;
                 Rectangle.Y = e.Y - Y_rct;
             }
-            if (LabelBool)
-            {
-                l2.X = e.X - X_label;
-                l2.Y = e.Y - Y_label;
-            }
+            
             pb.Invalidate();
         }
 
