@@ -15,6 +15,7 @@ namespace GeoMapGameLabor3
         string ListName = "";
         Random random = new Random();
         int randomIndex;
+        string randomCountry;
 
         public Map(string List_Name)
         {
@@ -33,7 +34,7 @@ namespace GeoMapGameLabor3
                     {
                         string line = reader.ReadLine();
                         list_country.Add(line);
-                        
+                        list_country2.Add(line);
                     }
                 }
             }
@@ -44,49 +45,57 @@ namespace GeoMapGameLabor3
             Console.WriteLine(list_country);
 
         }
-        public string ListCountryIndex(int x)
+        public string ListCountryIndex(int index)
         {
-            string i = list_country[x];
-            //x++;
-            return i;
+            int h = list_country.Count;
+            if (index >= 0 && index < h)
+            {
+                return list_country[index];
+            }
+            else
+            {
+                return "Invalid Index";
+            }
         }
-        
+
         public string CountryName()
         {
+            //if (list_country.Count == 0)
+            //{
+            //    return string.Empty;
+            //}
+
+            //do
+            //{
+            //    randomIndex = random.Next(list_country.Count);
+            //    randomCountry = list_country[randomIndex];
+            //    list_country2 = new List<string>();
+            //    return randomCountry;
+
+            //} while (list_country2.Contains(randomCountry));
             if (list_country.Count == 0)
             {
+                // Если список пуст, вернуть пустую строку или другое значение по умолчанию
                 return string.Empty;
             }
 
-            string randomCountry;
-
-            for (int i = 0; i <= list_country.Count; i++)
+            // Получаем случайный индекс из списка
+            if (list_country.Count > 1)
             {
-                randomIndex = random.Next(list_country.Count);
-                randomCountry = list_country[randomIndex];
-                if (randomCountry i)
+                int randomIndex = random.Next(list_country2.Count);
+                randomCountry = list_country2[randomIndex];
+                list_country2.RemoveAt(randomIndex);
+                return randomCountry;
             }
-            do
+            else
             {
-                
-            } while (list_use.Contains(randomCountry));
-
-            // Добавляем выбранное значение в список использованных
-            list_use.Add(randomCountry);
-
-            // Если список использованных стран стал таким же, как основной список, завершаем игру
-            if (list_use.Count == list_country.Count)
-            {
-                // Логика завершения игры (например, вывод сообщения или другие действия)
-                // ...
-
-                // Возвращаем пустую строку или другое значение по умолчанию
-                return string.Empty;
+                randomCountry = list_country2[0];
+                return randomCountry;
             }
-
-            // Возвращаем уникальное значение
-            return randomCountry;
+            return string.Empty;
             
+
+
         }
         
     }

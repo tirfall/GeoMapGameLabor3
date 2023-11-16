@@ -47,7 +47,6 @@ namespace GeoMapGameLabor3
             pb.BorderStyle = BorderStyle.Fixed3D;
             pb.MouseDown += Pb_MouseDown;
             pb.MouseMove += Pb_MouseMove;
-            pb.MouseUp += Pb_MouseUp;
             this.Controls.Add(pb);
 
             EuropaCountry.ListAndMap();
@@ -64,7 +63,6 @@ namespace GeoMapGameLabor3
             l1.BorderStyle = BorderStyle.Fixed3D;
             l1.MouseDown += L1_MouseDown;
             l1.MouseMove += L1_MouseMove;
-            l1.MouseUp += L1_MouseUp;
             pb.Controls.Add(l1);
 
             countryNameLabel = new System.Windows.Forms.Label();
@@ -80,7 +78,7 @@ namespace GeoMapGameLabor3
             btn = new System.Windows.Forms.Button();
             btn.Location = new Point(1, 1);
             btn.Size = new Size(50, 30);
-            btn.Text = "edasi";
+            btn.Text = "Next";
             btn.Click += Btn_Click;
             this.Controls.Add(btn);
 
@@ -286,8 +284,8 @@ namespace GeoMapGameLabor3
 
         private void Btn_Click(object? sender, EventArgs e) 
         {
-
-
+            k++;
+            final2_label.Text = k.ToString();
             AddToListLabels();
             for (int x = 0; x < list_l_country.Count; x++)//Здесь идёт проверка места, с ней всё нормально вроде
             {
@@ -304,6 +302,7 @@ namespace GeoMapGameLabor3
                         //    //брало не албанию как надо, а Андорру. При втором нажатии уже через одну страну брало, и так далее
                         //{
                             final1_label.Text = EuropaCountry.ListCountryIndex(x);
+                            
                             if (countryNamel1 == EuropaCountry.ListCountryIndex(x))
                             {
 
@@ -340,7 +339,7 @@ namespace GeoMapGameLabor3
 
 
 
-
+            //Это был план б
             //else if ((l1.Location.X < l_Andorra.Location.X + l_Andorra.Width) && (l1.Location.X > l_Andorra.Location.X))
             //{
             //    if ((l1.Location.Y < l_Andorra.Location.Y + l_Andorra.Height) && (l1.Location.Y > l_Andorra.Location.Y))
@@ -504,11 +503,6 @@ namespace GeoMapGameLabor3
             }
         }
 
-        private void Pb_MouseUp(object sender, MouseEventArgs e)
-        {
-
-        }
-
         private void L1_MouseDown(object sender, MouseEventArgs e)
         {
             X_l1 = e.X;
@@ -525,10 +519,6 @@ namespace GeoMapGameLabor3
             }
         }
 
-        private void L1_MouseUp(object sender, MouseEventArgs e)
-        {
-
-        }
 
     }
 }

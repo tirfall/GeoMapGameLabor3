@@ -17,7 +17,7 @@ namespace GeoMapGameLabor3
         double KD;
 
         XmlDocument xDoc = new XmlDocument();
-        
+
 
         public PlayerClass(string PlayerName, int Score, int Time)
         {
@@ -26,10 +26,10 @@ namespace GeoMapGameLabor3
             time = Time;
             KD = time / score;
         }
-        
-        public double Score() 
-        { 
-            
+
+        public double Score()
+        {
+
             return KD;
         }
         public void addingToList() //добавляет в документ игроков https://metanit.com/sharp/tutorial/16.2.php
